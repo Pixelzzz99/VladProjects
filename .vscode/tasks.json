@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe сборка активного файла",
+      "command": "C:\\Program Files\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-g",
+        "${workspaceFolder}\\Files\\**.cpp",
+        "-o",
+        "${workspaceFolder}\\Bin\\main.exe"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Задача создана отладчиком."
+    }
+  ],
+  "version": "2.0.0"
+}
