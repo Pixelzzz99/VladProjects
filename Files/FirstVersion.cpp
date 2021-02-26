@@ -9,25 +9,31 @@
 
 FirstVersion::FirstVersion(TaskGenerator *task)
 {
+    old_text = task->getString();
 }
 
 void FirstVersion::solve()
 {
     using namespace std;
-
-    string txt, s;
+    string txt;
     int L = 0;
-    while (cin >> s)
+    for (int i = 0; i < old_text.size(); i++)
     {
-        L = max(L, (int)s.length());
-        if (txt.size() > 0)
-            txt.push_back(' ');
-        for (int id = 0; id < s.length(); id++)
+        int j = i;
+        string res;
+        while (j < (int)old_text.size() && old_text[j] != ' ')
+            j++;
+        for (int k = i; k < j; k++)
+            res.push_back(old_text[k]);
+        j = j - 1;
+        L = std::max(L, (int)res.length());
+        for (int id = 0; id < res.length(); id++)
         {
-            char ch = s[id];
+            char ch = res[id];
             txt.push_back(ch);
         }
     }
+
     map<string, int> countStrings;
     for (int len = 1; len <= L; len++)
     {
@@ -51,7 +57,8 @@ void FirstVersion::solve()
                 countStrings[st]++;
         }
     }
-    vector<pair<int, string>> ans[L + 1];
+    vector<vector<pair<int, string>>> ans;
+    ans.resize(L + 1);
     for (auto value : countStrings)
     {
         ans[(int)value.first.size()].push_back({value.second, value.first});
@@ -59,8 +66,9 @@ void FirstVersion::solve()
     for (int n = 1; n <= L; n++)
     {
         sort(ans[n].rbegin(), ans[n].rend());
-        for (auto res : ans[n])
-            cout << res.second << " ";
-        cout << endl;
+        //for (auto res : ans[n])
+        //    cout << res.second << " ";
+        //cout << endl;
     }
+   
 }

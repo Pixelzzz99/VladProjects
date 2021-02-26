@@ -9,26 +9,33 @@
 
 SecondVersion::SecondVersion(TaskGenerator *task)
 {
+    old_text = task->getString();
 }
 
 void SecondVersion::solve()
 {
     using namespace std;
 
-    string txt, s;
+    string txt;
     int L = 0;
 
     set<pair<string, int>> strings;
     map<string, int> count_strings;
-
-    while (cin >> s)
+    for (int i = 0; i < old_text.size(); i++)
     {
-        L = max(L, (int)s.length());
+        int j = i;
+        string res;
+        while (j < (int)old_text.size() && old_text[j] != ' ')
+            j++;
+        for (int k = i; k < j; k++)
+            res.push_back(old_text[k]);
+        j = j - 1;
+        L = std::max(L, (int)res.length());
         if (txt.size() > 0)
             txt.push_back(' ');
-        for (int id = 0; id < s.length(); id++)
+        for (int id = 0; id < res.length(); id++)
         {
-            char ch = s[id];
+            char ch = res[id];
             txt.push_back(ch);
             string CH = "";
             CH.push_back(ch);
@@ -47,9 +54,9 @@ void SecondVersion::solve()
         for (auto st : unique_strings)
             v.push_back({count_strings[st], st});
         sort(v.rbegin(), v.rend());
-        for (auto st : v)
-            cout << st.second << " ";
-        cout << endl;
+        //for (auto st : v)
+        //    cout << st.second << " ";
+        //cout << endl;
 
         set<pair<string, int>> new_strings;
         for (auto st : strings)
