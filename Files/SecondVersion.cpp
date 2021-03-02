@@ -23,13 +23,15 @@ void SecondVersion::solve()
     map<string, int> count_strings;
     for (int i = 0; i < old_text.size(); i++)
     {
+        if (old_text[i] == ' ')
+            continue;
         int j = i;
         string res;
         while (j < (int)old_text.size() && old_text[j] != ' ')
             j++;
         for (int k = i; k < j; k++)
             res.push_back(old_text[k]);
-        j = j - 1;
+        i = j - 1;
         L = std::max(L, (int)res.length());
         if (txt.size() > 0)
             txt.push_back(' ');
@@ -53,10 +55,15 @@ void SecondVersion::solve()
             unique_strings.insert(st.first);
         for (auto st : unique_strings)
             v.push_back({count_strings[st], st});
-        sort(v.rbegin(), v.rend());
-        //for (auto st : v)
-        //    cout << st.second << " ";
-        //cout << endl;
+        sort(v.begin(), v.end(), [](pair<int, string> a, pair<int, string> b) {
+            return a.first > b.first || a.first == b.first && a.second < b.second;
+        });
+        for (auto st : v)
+        {
+            cout << st.second << " ";
+            //cout << st.first << " " << st.second << endl;
+        }
+        cout << endl;
 
         set<pair<string, int>> new_strings;
         for (auto st : strings)

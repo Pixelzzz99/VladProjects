@@ -69,9 +69,10 @@ int TestExcel()
 
 int main()
 {
-    TestExcel();
-    //    TestSimple1();
-    //    TestSimple2();
+    //TestExcel();
+    TestSimple1();
+    TestSimple2();
+    delete task_global;
     system("pause>nul");
     return 0;
 }

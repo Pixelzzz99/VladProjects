@@ -19,21 +19,22 @@ void FirstVersion::solve()
     int L = 0;
     for (int i = 0; i < old_text.size(); i++)
     {
+        if(old_text[i] == ' ') continue;
         int j = i;
         string res;
         while (j < (int)old_text.size() && old_text[j] != ' ')
             j++;
         for (int k = i; k < j; k++)
             res.push_back(old_text[k]);
-        j = j - 1;
+        i = j - 1;
         L = std::max(L, (int)res.length());
         for (int id = 0; id < res.length(); id++)
         {
             char ch = res[id];
-            txt.push_back(ch);
+            
         }
     }
-
+    txt = old_text;
     map<string, int> countStrings;
     for (int len = 1; len <= L; len++)
     {
@@ -65,10 +66,13 @@ void FirstVersion::solve()
     }
     for (int n = 1; n <= L; n++)
     {
-        sort(ans[n].rbegin(), ans[n].rend());
-        //for (auto res : ans[n])
-        //    cout << res.second << " ";
-        //cout << endl;
+        sort(ans[n].begin(), ans[n].end(), [](pair<int, string> a, pair<int, string> b ) {
+            return a.first > b.first || a.first == b.first && a.second < b.second;
+        });
+        for (auto res : ans[n])
+            cout << res.second << " ";
+        cout << endl;
+
     }
    
 }
